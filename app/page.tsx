@@ -4,7 +4,7 @@ import Link from "next/link";
 export interface dailyType {
   date: string;
   explanation: string;
-  hdUrl: string;
+  hdurl: string;
   media_type: string;
   service_version: string;
   title: string;
