@@ -1,15 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
-
-export interface dailyType {
-  date: string;
-  explanation: string;
-  hdUrl: string;
-  media_type: string;
-  service_version: string;
-  title: string;
-  url: string;
-}
+import { dailyType } from "../page";
 
 async function getData(): Promise<dailyType> {
   const res = await fetch(
@@ -21,17 +11,18 @@ async function getData(): Promise<dailyType> {
 export default async function Home() {
   const dailyImage = await getData();
   return (
-    <main className="flex min-h-screen w-2/3 m-auto flex-col items-center p-24">
-      <Link href="/daily">
-        <h1 className="text-center mb-6">{dailyImage?.title}</h1>
+    <main className="flex min-h-screen flex-col gap-6 items-center p-24">
+      <h1>{dailyImage?.title}</h1>
+      <article className="flex flex-col md:flex-row gap-10">
         <Image
           src={dailyImage?.url}
           alt="Image of day"
           width={512}
           height={512}
-          className="rounded-lg"
+          className="rounded-lg w-1/2"
         />
-      </Link>
+        <p className="w-1/2">{dailyImage.explanation}</p>
+      </article>
     </main>
   );
 }
